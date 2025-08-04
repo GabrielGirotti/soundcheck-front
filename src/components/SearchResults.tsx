@@ -57,7 +57,7 @@ const SearchResults: React.FC = () => {
             onClick={() => handleClick(inst._id)}
             className="bg-slate-800 hover:bg-slate-700 hover:shadow-2xl p-4 rounded-t-3xl rounded-l-3xl shadow relative hover:scale-105 transition duration-300 cursor-pointer"
           >
-              {inst.imageUrls && inst.imageUrls.length > 0 && (
+            {inst.imageUrls && inst.imageUrls.length > 0 && (
               <img
                 src={`http://localhost:4000${inst.imageUrls[0]}`} // Primera imagen
                 alt={inst.title}
