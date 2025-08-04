@@ -20,7 +20,11 @@ const HeroSlider: React.FC = () => {
   useEffect(() => {
     const fetchSlides = async () => {
       try {
-        const res = await fetch("http://localhost:4000/instruments/featured");
+        const res = await fetch("http://localhost:4000/instruments/featured", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
         const data = await res.json();
         setSlides(data);
       } catch (error) {
