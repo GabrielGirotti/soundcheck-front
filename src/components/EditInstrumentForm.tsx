@@ -14,6 +14,8 @@ const EditInstrumentForm: React.FC = () => {
   const [category, setCategory] = useState("");
   const [loading, setLoading] = useState(true);
 
+  const [deleting, setDeleting] = useState(false);
+
   useEffect(() => {
     const fetchInstrument = async () => {
       try {
@@ -102,10 +104,45 @@ const EditInstrumentForm: React.FC = () => {
     setImageFiles(newFiles);
   };
 
+  const handleDelete = async (id: string) => {
+    if (!window.confirm("¿Seguro que deseas eliminar este producto?")) return;
+
+    setDeleting(true);
+    const token = localStorage.getItem("token");
+
+    try {
+      const res = await fetch(`http://localhost:4000/instruments/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!res.ok) throw new Error("Error al eliminar producto");
+
+      alert("Producto eliminado con éxito");
+      navigate("/panel");
+    } catch (error) {
+      alert("No se pudo eliminar el producto");
+      console.error(error);
+    } finally {
+      setDeleting(false);
+    }
+  };
+
   return (
     <div className="max-w-md mx-auto p-6 rounded-md">
       <form onSubmit={handleSubmit}>
-        <h2 className="text-2xl mb-4 text-white">Editar Instrumento</h2>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-2xl text-white">Editar Instrumento</h2>
+          <button
+            onClick={() => navigate("/panel")}
+            className="text-orange-400 hover:text-white font-semibold transition duration-300"
+            type="button"
+          >
+            &larr; Volver
+          </button>
+        </div>
 
         <label className="block mb-2 text-gray-300">Título</label>
         <input
@@ -185,21 +222,27 @@ const EditInstrumentForm: React.FC = () => {
           </div>
         )}
 
-        <nav className="flex justify-between p-4 items-end">
-          <button
-            type="submit"
-            className="bg-gradient-to-r from-orange-400 to-pink-600 hover:scale-105 text-white py-2 px-4 rounded transition duration-300"
-          >
-            Guardar cambios
-          </button>
-          <button
-            onClick={() => navigate("/panel")}
-            className="text-orange-400 hover:text-white font-semibold transition duration-300"
-            type="button"
-          >
-            &larr; Volver
-          </button>
-        </nav>
+        <button
+          type="submit"
+          className="bg-gradient-to-r from-orange-400 to-pink-600 hover:scale-105 text-white py-2 px-4 rounded transition duration-300 w-full my-2"
+        >
+          Guardar cambios
+        </button>
+
+        <button
+          type="button"
+          onClick={() => handleDelete(id!)}
+          className="bg-red-500 hover:bg-red-700 text-white p-2 rounded my-2 w-full flex justify-center items-center gap-2 disabled:opacity-60"
+          disabled={deleting}
+        >
+          {deleting ? (
+            <>
+              <Spinner />
+            </>
+          ) : (
+            "Eliminar instrumento"
+          )}
+        </button>
       </form>
     </div>
   );

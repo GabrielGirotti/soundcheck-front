@@ -80,7 +80,16 @@ const NewInstrumentForm: React.FC = () => {
   return (
     <div className="max-w-md mx-auto p-6 rounded-md">
       <form onSubmit={handleSubmit}>
-        <h2 className="text-2xl mb-4 text-white">Vender Instrumento</h2>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-2xl text-white">Vender Instrumento</h2>
+          <button
+            onClick={() => navigate("/")}
+            className="text-orange-400 hover:text-white font-semibold transition duration-300"
+            type="button"
+          >
+            &larr; Volver
+          </button>
+        </div>
 
         <label className="block mb-2 text-gray-300">Título</label>
         <input
@@ -125,7 +134,9 @@ const NewInstrumentForm: React.FC = () => {
           required
         />
 
-        <label className="block mb-2 text-gray-300">Imágenes del instrumento</label>
+        <label className="block mb-2 text-gray-300">
+          Imágenes del instrumento
+        </label>
         <div className="mb-4">
           <label className="flex flex-col items-center justify-center px-4 py-6 bg-gray-800 text-white rounded-lg shadow-md cursor-pointer hover:bg-gray-700 transition">
             <svg
@@ -165,21 +176,12 @@ const NewInstrumentForm: React.FC = () => {
           </div>
         )}
 
-        <nav className="flex justify-between p-2 items-end">
-          <button
-            type="submit"
-            className="bg-gradient-to-r from-orange-400 to-pink-600 hover:scale-105 text-white py-2 px-4 rounded transition duration-300"
-          >
-            Publicar
-          </button>
-          <button
-            onClick={() => navigate("/")}
-            className="text-orange-400 hover:text-white font-semibold transition duration-300"
-            type="button"
-          >
-            &larr; Volver
-          </button>
-        </nav>
+        <button
+          type="submit"
+          className="w-full bg-gradient-to-r from-orange-400 to-pink-600 hover:scale-105 text-white py-2 px-4 rounded transition duration-300"
+        >
+          Publicar
+        </button>
       </form>
     </div>
   );
