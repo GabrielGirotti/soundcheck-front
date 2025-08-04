@@ -7,7 +7,7 @@ import Spinner from "./Spinner";
 
 interface Slide {
   _id: string;
-  imageUrl: string;
+  imageUrls?: string[];
   title: string;
   description: string;
   price: number;
@@ -50,8 +50,8 @@ const HeroSlider: React.FC = () => {
               className="w-full h-full bg-cover bg-center flex items-center justify-start px-6 lg:px-20 text-white"
               style={{
                 backgroundImage: `url(${
-                  slide.imageUrl
-                    ? `http://localhost:4000${slide.imageUrl}`
+                  slide.imageUrls
+                    ? `http://localhost:4000${slide.imageUrls[0]}`
                     : "https://via.placeholder.com/800x400?text=Sin+Imagen"
                 })`,
               }}
