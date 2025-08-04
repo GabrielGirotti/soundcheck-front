@@ -69,6 +69,7 @@ const UserPanel: React.FC<{ username: string | null }> = ({ username }) => {
         ) : (
           instruments.map((inst) => (
             <div
+            onClick={() => handleEdit(inst._id)}
               key={inst._id}
               className="bg-slate-800 hover:bg-slate-700 hover:shadow-2xl p-4 rounded-t-3xl rounded-l-3xl shadow relative hover:scale-105 transition duration-300 cursor-pointer"
             >
