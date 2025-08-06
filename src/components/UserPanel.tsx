@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Spinner from "./Spinner";
+import { toast } from "react-hot-toast";
 
 interface Instrument {
   _id: string;
@@ -68,7 +69,7 @@ const UserPanel: React.FC<{ username: string | null }> = ({ username }) => {
 
       setInstruments((prev) => prev.filter((inst) => inst._id !== id));
     } catch (error) {
-      alert("No se pudo eliminar el producto");
+      toast.error("No se pudo eliminar el producto");
     }
   };
 

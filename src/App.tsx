@@ -24,6 +24,8 @@ import ForgotPassword from "./components/ForgotPassword";
 import EditInstrumentForm from "./components/EditInstrumentForm";
 import ShowInstrument from "./components/ShowInstrument";
 
+import { Toaster } from "react-hot-toast";
+
 const App: React.FC = () => {
   const [token, setToken] = useState<string | null>(null);
   const [username, setUsername] = useState<string | null>(null);
@@ -54,6 +56,7 @@ const App: React.FC = () => {
   };
 
   return (
+    <>
     <Router>
       {token ? (
         <nav className="bg-gray-900 py-4 px-8 flex justify-between items-center text-white relative">
@@ -199,6 +202,17 @@ const App: React.FC = () => {
       </Routes>
       <Footer />
     </Router>
+    <Toaster
+        position="bottom-center"
+        reverseOrder={false}
+        toastOptions={{
+          style: {
+            background: "#333",
+            color: "#fff",
+          },
+        }}
+      />
+    </>
   );
 };
 

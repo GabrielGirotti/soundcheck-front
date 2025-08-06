@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 
 const Register: React.FC = () => {
@@ -23,7 +24,7 @@ const Register: React.FC = () => {
 
       if (!res.ok) throw new Error(data.message || "Error en registro");
 
-      alert("Registro exitoso, ya puedes iniciar sesión");
+      toast.success("Registro exitoso, ya puedes iniciar sesión");
       navigate("/login");
     } catch (err: any) {
       setError(err.message);

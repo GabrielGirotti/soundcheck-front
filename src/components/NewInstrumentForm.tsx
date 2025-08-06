@@ -1,5 +1,6 @@
 import React, { useState, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const NewInstrumentForm: React.FC = () => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const NewInstrumentForm: React.FC = () => {
     e.preventDefault();
 
     if (imageFiles.length === 0) {
-      alert("Por favor selecciona al menos una imagen.");
+      toast.error("Por favor selecciona al menos una imagen.");
       return;
     }
 
@@ -50,7 +51,7 @@ const NewInstrumentForm: React.FC = () => {
       if (!res.ok) throw new Error("Error al subir instrumento");
 
       const data = await res.json();
-      alert("Instrumento publicado con éxito");
+      toast.success("Instrumento publicado con éxito");
 
       // Reset form
       setTitle("");
@@ -62,7 +63,7 @@ const NewInstrumentForm: React.FC = () => {
 
       navigate("/");
     } catch (error) {
-      alert("Error al publicar instrumento");
+      toast.error("Error al publicar instrumento");
     }
   };
 

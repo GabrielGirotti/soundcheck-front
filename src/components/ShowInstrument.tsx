@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Spinner from "./Spinner";
+import { toast } from "react-hot-toast";
 
 const ShowInstrument = () => {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ const ShowInstrument = () => {
         );
         setUser(data.user);
       } catch (error) {
-        alert("No se pudo cargar el instrumento");
+        toast.error("No se pudo cargar el instrumento");
         navigate("/");
       } finally {
         setLoading(false);
