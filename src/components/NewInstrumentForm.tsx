@@ -50,7 +50,7 @@ const NewInstrumentForm: React.FC = () => {
 
       if (!res.ok) throw new Error("Error al subir instrumento");
 
-      const data = await res.json();
+      await res.json();
       toast.success("Instrumento publicado con éxito");
 
       // Reset form
