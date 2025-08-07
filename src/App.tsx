@@ -1,35 +1,25 @@
 import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
-  Navigate,
-} from "react-router-dom";
-
+import { Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
 import NewInstrumentForm from "./components/NewInstrumentForm";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import UserPanel from "./components/UserPanel";
-
 import SearchBar from "./components/Searchbar";
-
 import "swiper/css";
 import "swiper/css/pagination";
 import Footer from "./components/Footer";
-
 import SearchResults from "./components/SearchResults";
 import ForgotPassword from "./components/ForgotPassword";
 import EditInstrumentForm from "./components/EditInstrumentForm";
 import ShowInstrument from "./components/ShowInstrument";
-
 import { Toaster } from "react-hot-toast";
 
 const App: React.FC = () => {
   const [token, setToken] = useState<string | null>(null);
   const [username, setUsername] = useState<string | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -53,11 +43,11 @@ const App: React.FC = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
     setMenuOpen(false);
+    navigate(`/login`);
   };
 
   return (
     <>
-    <Router>
       {token ? (
         <nav className="bg-gray-900 py-4 px-8 flex justify-between items-center text-white relative">
           <Link
@@ -198,11 +188,11 @@ const App: React.FC = () => {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/panel" element={<UserPanel username={username} />} />
         <Route path="/edit-instrument/:id" element={<EditInstrumentForm />} />
-        <Route path="/show-instrument/:id" element={<ShowInstrument/>} />
+        <Route path="/show-instrument/:id" element={<ShowInstrument />} />
       </Routes>
       <Footer />
-    </Router>
-    <Toaster
+
+      <Toaster
         position="bottom-center"
         reverseOrder={false}
         toastOptions={{
